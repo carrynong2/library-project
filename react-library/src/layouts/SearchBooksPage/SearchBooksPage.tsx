@@ -25,7 +25,7 @@ export const SearchBooksPage = () => {
       if (searchUrl === '') {
         url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
       } else {
-        let searchWithPage = searchUrl.replace("<pageNumber>", `${currentPage} - 1`);
+        let searchWithPage = searchUrl.replace("<pageNumber>", `${currentPage - 1}`);
         url = baseUrl + searchWithPage;
       }
 
@@ -36,10 +36,10 @@ export const SearchBooksPage = () => {
       }
 
       const responseJson = await response.json();
-      const responseData = responseJson._embedded.books;
+      const responseData = responseJson.content;
 
-      setTotalAmountOfBooks(responseJson.page.totalElements);
-      setTotoalPages(responseJson.page.totalPages);
+      setTotalAmountOfBooks(responseJson.totalElements);
+      setTotoalPages(responseJson.totalPages);
 
       const loadedBooks: BookModel[] = [];
 
@@ -62,7 +62,6 @@ export const SearchBooksPage = () => {
       setIsLoading(false);
       setHttpError(error.message);
     })
-    window.scrollTo(0, 0);
   }, [currentPage, searchUrl])
 
   if (isLoading) {
