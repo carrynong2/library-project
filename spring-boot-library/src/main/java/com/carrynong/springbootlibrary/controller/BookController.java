@@ -17,7 +17,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("")
-    public ResponseEntity<Object> findAllBook(@RequestParam(required = false) Integer page,
+    public ResponseEntity<Object> getAllBook(@RequestParam(required = false) Integer page,
                                               @RequestParam(required = false) Integer size) {
         if (Utils.validatePageable(page, size)) {
             return ResponseEntity.ok(bookService.findAllBook());
@@ -28,7 +28,7 @@ public class BookController {
     }
 
     @GetMapping("/search/findByCategory")
-    public ResponseEntity<Object> findByCategory(
+    public ResponseEntity<Object> getBooksByCategory(
                                                 @RequestParam() String category,
                                                 @RequestParam(required = false) Integer page,
                                               @RequestParam(required = false) Integer size) {
@@ -41,7 +41,7 @@ public class BookController {
     }
 
     @GetMapping("/search/findByTitleContaining")
-    public ResponseEntity<Object> findByTitle(
+    public ResponseEntity<Object> getBooksByTitle(
             @RequestParam() String title,
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer size) {
@@ -51,6 +51,11 @@ public class BookController {
             Page<Book> books = bookService.findByTitle(title, page, size);
             return ResponseEntity.ok(books);
         }
+    }
+
+    @GetMapping("/{bookId}")
+    public Book getBookById(@PathVariable Long bookId) {
+        return bookService.findById(bookId);
     }
 
 }
