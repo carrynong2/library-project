@@ -12,5 +12,10 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowedMethods("GET")
                 .maxAge(3600);
+
+        registry.addMapping("/api/reviews")
+                .allowedOrigins("*")
+                .allowedMethods("GET")
+                .maxAge(3600);
     }
 }
