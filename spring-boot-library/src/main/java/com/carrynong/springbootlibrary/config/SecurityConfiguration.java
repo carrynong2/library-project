@@ -2,6 +2,7 @@ package com.carrynong.springbootlibrary.config;
 
 import com.okta.spring.boot.oauth.Okta;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 
+@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
@@ -17,12 +19,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         // Disable Cross Site Request Forgery
-        http.csrf(csrf -> csrf.disable());
-
-        // Protect endpoints at /api/<type>/secure
-        http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/books/**").authenticated()
-                        .anyRequest().permitAll()
+        http.csrf(csrf -> csrf.disable())// Protect endpoints at /api/<type>/secure
+                .authorizeRequests(auth -> auth
+                        .requestMatchers("/api/books/secure/**").authenticated()
+                        .requestMatchers("/api/reviews/**", "/api/books/**").permitAll()
                 )
                 .oauth2ResourceServer(oAuth -> oAuth.jwt(Customizer.withDefaults()));
 
