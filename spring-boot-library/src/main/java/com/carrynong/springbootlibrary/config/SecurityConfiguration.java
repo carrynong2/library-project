@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -29,6 +30,7 @@ public class SecurityConfiguration {
 
         // Add CORS filters
         http.cors(AbstractHttpConfigurer::disable);
+        http.cors(Customizer.withDefaults());
 
         // Add content negotiation strategy
         http.setSharedObject(ContentNegotiationStrategy.class,
