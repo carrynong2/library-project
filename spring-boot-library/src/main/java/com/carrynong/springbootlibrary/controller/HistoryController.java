@@ -29,7 +29,7 @@ public class HistoryController {
         if (Utils.validatePageable(page, size)) {
             return ResponseEntity.ok(historyService.findAllHistory());
         } else {
-            Page<History> histories = historyService.findBooksByUserEmail(userEmail, page, size);
+            Page<History> histories = historyService.findHistoryByUserEmail(userEmail, page, size);
             return ResponseEntity.ok(histories);
         }
     }

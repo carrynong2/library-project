@@ -20,7 +20,7 @@ public class HistoryService {
         return historyRepository.findAll();
     }
 
-    public Page<History> findBooksByUserEmail(String userEmail, int page, int size) {
+    public Page<History> findHistoryByUserEmail(String userEmail, int page, int size) {
         if (size <= 0) {
             size = (int) historyRepository.count();
         }
