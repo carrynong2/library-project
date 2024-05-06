@@ -22,7 +22,8 @@ public class SecurityConfiguration {
         // Disable Cross Site Request Forgery
         http.csrf(csrf -> csrf.disable())// Protect endpoints at /api/<type>/secure
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/api/books/secure/**").authenticated()
+                        .requestMatchers("/api/books/secure/**",
+                                "/api/reviews/secure/**").authenticated()
                         .requestMatchers("/api/reviews/**", "/api/books/**").permitAll()
                 )
                 .oauth2ResourceServer(oAuth -> oAuth.jwt(Customizer.withDefaults()));
