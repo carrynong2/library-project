@@ -1,7 +1,6 @@
 package com.carrynong.springbootlibrary.controller;
 
 import com.carrynong.springbootlibrary.entities.History;
-import com.carrynong.springbootlibrary.entities.Review;
 import com.carrynong.springbootlibrary.services.HistoryService;
 import com.carrynong.springbootlibrary.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;

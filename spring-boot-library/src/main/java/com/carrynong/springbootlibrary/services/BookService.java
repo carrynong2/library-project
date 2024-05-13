@@ -72,6 +72,7 @@ public class BookService {
         if (!book.isPresent() || validateCheckout != null || book.get().getCopiesAvailable() <= 0) {
             throw new Exception("Book does't exist or already checked out by user");
         }
+
         book.get().setCopiesAvailable(book.get().getCopiesAvailable() - 1);
         bookRepository.saveAndFlush(book.get());
 
